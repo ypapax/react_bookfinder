@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Grid, Row, Col, Accordion, Panel} from 'react-bootstrap';
-import PanelGroup from "react-bootstrap/es/PanelGroup";
 
 
 class Header extends Component {
@@ -11,22 +10,18 @@ class Header extends Component {
                 let id = book.id;
                 let title = book.volumeInfo.title;
                 return (
-                    <Panel eventKey={id} key={id}>
-                        <Panel.Heading>
-                            <Panel.Title toggle>{title}</Panel.Title>
-                        </Panel.Heading>
-                        <Panel.Body collapsible>
+                    <Panel header={title} eventKey={id} key={id}>
                             test
-                        </Panel.Body>
+
                     </Panel>
                 )
             });
         }
         return (
             <div>
-                <PanelGroup accordion id="books-panel-group">
+                <Accordion id="books-panel-group">
                     {bookItems}
-                </PanelGroup>
+                </Accordion>
             </div>
         );
     }
