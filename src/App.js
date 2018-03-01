@@ -4,6 +4,7 @@ import Header from "./Components/Header";
 import {Grid, Col, Row} from 'react-bootstrap'
 
 import Books from './Components/Books'
+import * as axios from "axios";
 
 class App extends Component {
   constructor(){
@@ -13,6 +14,24 @@ class App extends Component {
           text: 'Harry Potter'
       }
   }
+
+  componentWillMount(){
+      this.getBooks();
+  }
+
+  getBooks(){
+      axios.request({
+          method: 'get',
+          url: 'https://www.googleapis.com/books/v1/volumes?q='+this.state.text
+      }).then((response)=>{
+          this.setState({books: response.data.items}, ()=>{
+                  console.log("getBooks setState", this.state.books);
+              });
+      }).catch((error)=>{
+          console.warn(error);
+      });
+  }
+
 
   render() {
     return (
