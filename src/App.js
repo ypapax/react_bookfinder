@@ -5,6 +5,7 @@ import {Grid, Col, Row} from 'react-bootstrap'
 
 import Books from './Components/Books'
 import * as axios from "axios";
+import SearchInput from "./Components/SearchInput";
 
 class App extends Component {
   constructor(){
@@ -32,6 +33,10 @@ class App extends Component {
       });
   }
 
+  handleChange(text) {
+      this.setState({text: text}, this.getBooks)
+  }
+
 
   render() {
     return (
@@ -40,6 +45,7 @@ class App extends Component {
           <Grid>
               <Row>
                   <Col xs={12} md={12} lg={12}>
+                      <SearchInput value={this.state.text} onChange={this.handleChange.bind(this)}/>
                       <Books books={this.state.books}/>
                   </Col>
               </Row>
